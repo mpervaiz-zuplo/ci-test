@@ -35,7 +35,7 @@ jobs:
       - name: Deploy fails with clear error when --project is omitted
         env:
           ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
-        run: npx ./nick-fix.tgz deploy
+        run: npx zuplo@6.68.26 deploy
 
   test-project-no-account:
     runs-on: ubuntu-latest
@@ -47,7 +47,7 @@ jobs:
       - name: Deploy (--project but no --account)
         env:
           ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
-        run: npx ./nick-fix.tgz deploy --project ci-test
+        run: npx zuplo@6.68.26 deploy --project ci-test
 
   test-link-then-deploy-pinned:
     runs-on: ubuntu-latest
@@ -75,7 +75,7 @@ jobs:
           ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
           ZUPLO_PROJECT: ci-test
           ZUPLO_ACCOUNT: olive_excellent_jellyfish
-        run: npx ./nick-fix.tgz deploy
+        run: npx zuplo@6.68.26 deploy
 
   test-env-var-project-only:
     runs-on: ubuntu-latest
@@ -88,7 +88,7 @@ jobs:
         env:
           ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
           ZUPLO_PROJECT: ci-test
-        run: npx ./nick-fix.tgz deploy
+        run: npx zuplo@6.68.26 deploy
 
   test-link-then-deploy:
     runs-on: ubuntu-latest
@@ -101,8 +101,8 @@ jobs:
         env:
           ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
         run: |
-          npx ./nick-fix.tgz link --account olive_excellent_jellyfish --project ci-test --environment production
-          npx ./nick-fix.tgz deploy
+          npx zuplo@6.68.26 link --account olive_excellent_jellyfish --project ci-test --environment production
+          npx zuplo@6.68.26 deploy
 
   test-simulated-link-then-deploy:
     runs-on: ubuntu-latest
@@ -120,4 +120,4 @@ jobs:
       - name: Deploy (no --project, linked config present)
         env:
           ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
-        run: npx ./nick-fix.tgz deploy
+        run: npx zuplo@6.68.26 deploy
