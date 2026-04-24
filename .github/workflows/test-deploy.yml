@@ -25,14 +25,14 @@ jobs:
           ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
         run: npx zuplo@6.67.32 deploy
 
-  test-nick-fix:
+  test-no-project-flag:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Deploy (Nick's fix - no --project)
+      - name: Deploy fails with clear error when --project is omitted
         env:
           ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
         run: npx ./nick-fix.tgz deploy
