@@ -49,6 +49,20 @@ jobs:
           ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
         run: npx ./nick-fix.tgz deploy --project ci-test
 
+  test-link-then-deploy-pinned:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Link then deploy pinned 6.67.32 (no --project on deploy)
+        env:
+          ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
+        run: |
+          npx zuplo@6.67.32 link --account olive_excellent_jellyfish --project ci-test
+          npx zuplo@6.67.32 deploy
+
   test-link-then-deploy:
     runs-on: ubuntu-latest
     steps:
