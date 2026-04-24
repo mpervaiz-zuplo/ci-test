@@ -23,4 +23,4 @@ jobs:
       - name: Deploy (pinned 6.68.9 - no --project)
         env:
           ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
-        run: npx zuplo@6.68.9 deploy
+        run: npx zuplo@6.67.32 deploy
