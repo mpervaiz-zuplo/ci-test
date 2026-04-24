@@ -101,5 +101,5 @@ jobs:
         env:
           ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
         run: |
-          npx ./nick-fix.tgz link --account olive_excellent_jellyfish --project ci-test
+          npx ./nick-fix.tgz link --account olive_excellent_jellyfish --project ci-test --environment main
           npx ./nick-fix.tgz deploy
