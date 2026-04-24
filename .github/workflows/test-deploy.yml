@@ -37,6 +37,18 @@ jobs:
           ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
         run: npx ./nick-fix.tgz deploy
 
+  test-project-no-account:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Deploy (--project but no --account)
+        env:
+          ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
+        run: npx ./nick-fix.tgz deploy --project ci-test
+
   test-link-then-deploy:
     runs-on: ubuntu-latest
     steps:
