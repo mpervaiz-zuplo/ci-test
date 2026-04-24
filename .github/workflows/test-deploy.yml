@@ -63,6 +63,33 @@ jobs:
           npx zuplo@6.67.32 link --account olive_excellent_jellyfish --project ci-test
           npx zuplo@6.67.32 deploy
 
+  test-env-var-project-and-account:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Deploy via ZUPLO_PROJECT + ZUPLO_ACCOUNT env vars
+        env:
+          ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
+          ZUPLO_PROJECT: ci-test
+          ZUPLO_ACCOUNT: olive_excellent_jellyfish
+        run: npx ./nick-fix.tgz deploy
+
+  test-env-var-project-only:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Deploy via ZUPLO_PROJECT only (no account)
+        env:
+          ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
+          ZUPLO_PROJECT: ci-test
+        run: npx ./nick-fix.tgz deploy
+
   test-link-then-deploy:
     runs-on: ubuntu-latest
     steps:
