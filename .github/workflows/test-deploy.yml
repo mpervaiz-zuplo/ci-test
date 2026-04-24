@@ -103,3 +103,21 @@ jobs:
         run: |
           npx ./nick-fix.tgz link --account olive_excellent_jellyfish --project ci-test --environment production
           npx ./nick-fix.tgz deploy
+
+  test-simulated-link-then-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Simulate linked config (.env.zuplo)
+        run: |
+          cat > .env.zuplo << EOF
+          ZUPLO_ACCOUNT_NAME=olive_excellent_jellyfish
+          ZUPLO_PROJECT_NAME=ci-test
+          EOF
+      - name: Deploy (no --project, linked config present)
+        env:
+          ZUPLO_API_KEY: ${{ secrets.ZUPLO_API_KEY }}
+        run: npx ./nick-fix.tgz deploy
